@@ -7,7 +7,7 @@
 | Задание | Выполнение | Баллы |
 | ------ | ------ | ------ |
 | Задание 1 | * | 60 |
-| Задание 2 | # | 20 |
+| Задание 2 | * | 20 |
 | Задание 3 | # | 20 |
 
 знак "*" - задание выполнено; знак "#" - задание не выполнено;
@@ -48,11 +48,11 @@
 
 Данный код возвращает данные в гугл-таблицу данные с прошлой лабораторной работы:
 
-![8989 1](https://user-images.githubusercontent.com/103886479/194927395-c545e7e2-e960-4fa9-82f8-aec984542692.jpg)
+![10](https://user-images.githubusercontent.com/103886479/194927858-83b18995-34c3-4406-896e-004103390c28.jpg)
 
-![8989 2](https://user-images.githubusercontent.com/103886479/194927426-619ab519-6311-4790-81be-ddb535992e09.jpg)
+![20](https://user-images.githubusercontent.com/103886479/194927877-7c53b7bf-2590-4678-966b-9e18af937325.jpg)
 
-![8989 3](https://user-images.githubusercontent.com/103886479/194927444-ce526826-7da2-4639-835c-fe2be149a357.jpg)
+![30](https://user-images.githubusercontent.com/103886479/194927898-eda64d76-65fd-490b-a3be-50ec30ab15e1.jpg)
 
 
 
