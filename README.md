@@ -1,5 +1,5 @@
 # АНАЛИЗ ДАННЫХ И ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ [in GameDev]
-Отчет по лабораторной работе #1 выполнил(а):
+Отчет по лабораторной работе #2 выполнил(а):
 - Чупшева Анна Романовна
 - РИ210945
 Отметка о выполнении заданий (заполняется студентом):
@@ -7,8 +7,8 @@
 | Задание | Выполнение | Баллы |
 | ------ | ------ | ------ |
 | Задание 1 | * | 60 |
-| Задание 2 | * | 20 |
-| Задание 3 | * | 20 |
+| Задание 2 | # | 20 |
+| Задание 3 | # | 20 |
 
 знак "*" - задание выполнено; знак "#" - задание не выполнено;
 
@@ -28,78 +28,82 @@
 
 ## Задание 1
 ### Пошагово выполнить каждый пункт раздела "ход работы" с описанием и примерами реализации задач
-На данном скриншоте использован GoogleColab для демонстрации работы кода на  pyhton.
+С помощью видео-инструкции я настроила вывод чисел в таблицу с помощью проекта PyCharm
+![скрин 1 1](https://user-images.githubusercontent.com/103886479/194914921-052b81c7-0cae-4a83-8265-083678e13ae5.jpg)
+![скрин 1 2](https://user-images.githubusercontent.com/103886479/194914950-fb5e6d78-8167-4c82-8fce-b7566ef04fef.jpg)
+![скрин 1 3](https://user-images.githubusercontent.com/103886479/194915429-7ec3285a-d3c2-46d5-a268-fca78f3f8176.jpg)
 
-![helloWorld](https://user-images.githubusercontent.com/103886479/192082146-32e09368-f568-444a-9722-ce98476ea996.jpg)
+Далее я подготовила проект на Unity, воспроизводящий звуки
+![скрин 1 5](https://user-images.githubusercontent.com/103886479/194918136-8d8e877e-a54b-463a-9a12-a77d09617667.jpg)
 
-На следующих двух скриншотах представлен код на языке C#, в программе Unity. В процессе выполнения работы обратила внимание на то, что для выполнения кода необходима его привязка к какому-либо объекту.
-
-![helloworld1](https://user-images.githubusercontent.com/103886479/192082931-94c2c772-1f14-43ea-b740-d4c9b55c38ee.jpg)
-![DONE](https://user-images.githubusercontent.com/103886479/192082941-83502152-8052-4ce7-b918-275ea4ade4ae.jpg)
 
 ## Задание 2
-Подготовка данных для работы с линейной регрессией:
+Реализовать запись в Google-таблицу набора данных, полученных с помощью линейной регрессии из лабораторной работы № 1
 
-![подготовка](https://user-images.githubusercontent.com/103886479/192092265-952fbf33-f5b0-417d-81b2-8eab763d0245.jpg)
+Скриншот из гугл-таблицы:
+![скрин 1 6](https://user-images.githubusercontent.com/103886479/194922918-99d1495d-d49e-4528-a4a5-9262d3ff52af.jpg)
 
+Данный код возвращает данные в гугл-таблицу данные с прошлой лабораторной работы:
 
-Далее смотрим на функции:
-
-![функции](https://user-images.githubusercontent.com/103886479/192092316-e3934b65-e292-4ac8-8f9f-09012910d14c.jpg)
-
-   
-   Насколько я понимаю, связанными функциями называются iterate и optimize. optimize и выполняет градиентный спуск, т.е. метод нахождения минимума функции. Это нам понадобится для построения линейной регрессии.
-   
-   
-После запуска первой итерации в GoogleColab получилось следующее:
-![код11](https://user-images.githubusercontent.com/103886479/192091115-14e1e329-bf0e-433d-b65c-701274efb3ae.jpg)
-
-Второй итерации:
-![код2](https://user-images.githubusercontent.com/103886479/192090736-f63f7562-25c2-4d48-9bc5-7f04f4ebe418.jpg)
-
-Третьей:
-![код3](https://user-images.githubusercontent.com/103886479/192090824-06a29e31-4b97-4a1c-9a39-913d54e9f7b0.jpg)
-
-Четвёртой:
-![код4](https://user-images.githubusercontent.com/103886479/192090920-8990a2dd-18aa-4615-8a3e-f6e20e9b572a.jpg)
-
-Пятой:
-![код5](https://user-images.githubusercontent.com/103886479/192090958-da529913-9295-4915-b05f-ceab3f35b4de.jpg)
-
-Тысячной:
-![код1000](https://user-images.githubusercontent.com/103886479/192091219-6a2ce8d0-6d30-4c87-8c71-52a5326128b8.jpg)
-
-Как мы видим, чем больше итераций, тем выше график.
-
-### Должна ли величина loss стремиться к нулю при изменении исходных данных? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ.
-
-Полагаю, да. loss - это величина, которая показывает количество потерь. По мере увеличения нами количества итераций мы наблюдаем уменьшение этой величины.
-
-Пример: 
-1 итерация
-![код11](https://user-images.githubusercontent.com/103886479/192091115-14e1e329-bf0e-433d-b65c-701274efb3ae.jpg)
-
-10-я итерация
-![10](https://user-images.githubusercontent.com/103886479/192091791-bb13b7d8-db2f-4fff-85c4-1a4e72deed32.jpg)
-
-100-я итерация
-![100](https://user-images.githubusercontent.com/103886479/192091680-8751f16f-1acc-40d7-a5f8-4b8dc97a727b.jpg)
-
-1000-я
-![код1000](https://user-images.githubusercontent.com/103886479/192091219-6a2ce8d0-6d30-4c87-8c71-52a5326128b8.jpg)
-
-10000-я
-![10000](https://user-images.githubusercontent.com/103886479/192091837-aa53f09d-2bcc-421b-a237-7a3cd871162a.jpg)
+import gspread
+import numpy as np
 
 
-## Задание 3
-### Какова роль параметра Lr? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ. В качестве эксперимента можете изменить значение параметра.
-Lr, если я правильно понимаю, - это параметр скорости обучения, необходимый для алгоритма градиентного спуска. 
+def loss_function(a, b, x, y):
+    num = len(x)
+    prediction = model(a, b, x)
+    return (0.5 / num) * (np.square(prediction - y)).sum()
+
+def model(a, b, x):
+    return a * x + b
+
+def optimize(a, b, x, y):
+    num = len(x)
+    prediction = model(a, b, x)
+
+    da = (1.0 / num) * ((prediction - y) * x).sum()
+    db = (1.0 / num) * ((prediction - y).sum())
+    a = a - Lr * da
+    b = b - Lr * db
+    return a, b
+
+def iterate(a,b,x,y,times):
+    for i in range(times):
+        a,b = optimize(a,b,x,y)
+    return a,b
+
+gc = gspread.service_account(filename='unitydatasciense-364505-581a2046f5a2.json')
+sh = gc.open('UnitySheet')
+x = [3, 21, 22, 34, 54, 34, 55, 67, 89, 99]
+x = np.array(x)
+y = [2, 22, 24, 65, 79, 82, 55, 130, 150, 199]
+y = np.array(y)
+a = np.random.rand(1)
+b = np.random.rand(1)
+Lr = 0.0001
+print(a,b,loss)
+i = 0
+while i <= len(x+1):
+    i += 1
+    if i == 0:
+        continue
+    else:
+        iter = np.random.randint(1, 15)
+        print(iter)
+        a,b = iterate(a,b,x,y,iter)
+        loss = loss_function(a, b, x, y)
+        tempInf = loss
+        tempInf = str(tempInf)
+        tempInf = tempInf.replace('.', ',')
+        sh.sheet1.update(('A' + str(i)), str(x[i-1]))
+        sh.sheet1.update(('B' + str(i)), str(y[i-1]))
+        sh.sheet1.update(('C' + str(i)), str(tempInf))
+        print(tempInf)
 
 
 ## Выводы
 
-В данной лабораторной работе мы настроили всё необходимое ПО для дальнейшей работы и теперь имеем представление, как пользоваться VS Code, и Unity. Узнали что такое градиентный спуск, линейная зависимость, алгоритм градиентного спуска. Научились использовать GoogleColab и Github. 
+Мы научились пользоваться GoogleCloud, подключили проект в PyCharm к таблицам, научились адаптировать код для разных задач.
 
 | Plugin | README |
 | ------ | ------ |
