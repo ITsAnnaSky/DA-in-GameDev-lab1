@@ -46,10 +46,15 @@ ml-agents-release_19/com.unity.ml-agents.extensions/package.json
 После этого мы добавляем скрипт для шара:
 
 using System.Collections;
+
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using Unity.MLAgents;
+
 using Unity.MLAgents.Sensors;
+
 using Unity.MLAgents.Actuators;
 
 public class RollerAgent : Agent
