@@ -1,5 +1,5 @@
 # АНАЛИЗ ДАННЫХ И ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ [in GameDev]
-Отчет по лабораторной работе #1 выполнил(а):
+Отчет по лабораторной работе #3 выполнил(а):
 - Чупшева Анна Романовна
 - РИ210945
 Отметка о выполнении заданий (заполняется студентом):
@@ -8,7 +8,7 @@
 | ------ | ------ | ------ |
 | Задание 1 | * | 60 |
 | Задание 2 | * | 20 |
-| Задание 3 | * | 20 |
+| Задание 3 | # | 20 |
 
 знак "*" - задание выполнено; знак "#" - задание не выполнено;
 
@@ -24,82 +24,136 @@
 
 
 ## Цель работы
-Ознакомиться с основными операторами зыка Python на примере реализации линейной регрессии.
+Познакомиться с программными средствами для создания системы машинного обучения и ее интеграции в Unity.
 
 ## Задание 1
-### Пошагово выполнить каждый пункт раздела "ход работы" с описанием и примерами реализации задач
-На данном скриншоте использован GoogleColab для демонстрации работы кода на  pyhton.
 
-![helloWorld](https://user-images.githubusercontent.com/103886479/192082146-32e09368-f568-444a-9722-ce98476ea996.jpg)
+Для начала мы в Unity добавим все нужные библиотеки:
 
-На следующих двух скриншотах представлен код на языке C#, в программе Unity. В процессе выполнения работы обратила внимание на то, что для выполнения кода необходима его привязка к какому-либо объекту.
+ml-agents-release_19/com.unity.ml-agents/package.json
+ml-agents-release_19/com.unity.ml-agents.extensions/package.json
 
-![helloworld1](https://user-images.githubusercontent.com/103886479/192082931-94c2c772-1f14-43ea-b740-d4c9b55c38ee.jpg)
-![DONE](https://user-images.githubusercontent.com/103886479/192082941-83502152-8052-4ce7-b918-275ea4ade4ae.jpg)
+![задание 1](https://user-images.githubusercontent.com/103886479/198079908-4f1f4bff-d173-4ea2-829f-586ed8b3892a.jpg)
+
+Далее активируем MLAgent
+
+![1222](https://user-images.githubusercontent.com/103886479/198081770-8ecd0b79-b116-4b93-943b-3f05aaa3c99d.jpg)
+
+Затем создаём объекты, которые в дальнейшем предстоит обучить 
+
+![1 3](https://user-images.githubusercontent.com/103886479/198081910-d5820a36-7f4e-4b86-8ed5-28cdce1abfa7.jpg)
+
+После этого мы добавляем скрипт для шара:
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
+
+public class RollerAgent : Agent
+{
+    Rigidbody rBody;
+    void Start()
+    {
+        rBody = GetComponent<Rigidbody>();
+    }
+    public Transform Target;
+    public override void OnEpisodeBegin()
+    {
+        if (this.transform.localPosition.y < 0)
+        {
+            this.rBody.angularVelocity = Vector3.zero;
+            this.rBody.velocity = Vector3.zero;
+            this.transform.localPosition = new Vector3(0, 0.5f, 0);
+        }
+        Target.localPosition = new Vector3(Random.value * 8-4, 0.5f, Random.value * 8-4);
+    }
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(Target.localPosition);
+        sensor.AddObservation(this.transform.localPosition);
+        sensor.AddObservation(rBody.velocity.x);
+        sensor.AddObservation(rBody.velocity.z);
+    }
+    public float forceMultiplier = 10;
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {
+        Vector3 controlSignal = Vector3.zero;
+        controlSignal.x = actionBuffers.ContinuousActions[0];
+        controlSignal.z = actionBuffers.ContinuousActions[1];
+        rBody.AddForce(controlSignal * forceMultiplier);
+        float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
+        if(distanceToTarget < 1.42f)
+        {
+            SetReward(1.0f);
+            EndEpisode();
+        }
+        else if (this.transform.localPosition.y < 0)
+        {
+            EndEpisode();
+        }
+    }
+}
+
+
+Добавление Decision Requester и Behavior Parameters
+
+![1 4](https://user-images.githubusercontent.com/103886479/198086697-29529708-09ed-40ed-94d7-7c4a5fc311e8.jpg)
+
+Далее следовало запустить обучение сначала на одной площадке:
+(шар и куб раскрасила)
+
+![обучение](https://user-images.githubusercontent.com/103886479/198087321-cbd20224-8b0a-40b0-ac5b-44ecedadcddd.jpg)
+
+![обучение2](https://user-images.githubusercontent.com/103886479/198087634-94f17e11-456a-4edb-af6e-4e7a4a4a7459.jpg)
+
+Затем на нескольких. Их количество нужно увеличивать
+
+![3 площадки](https://user-images.githubusercontent.com/103886479/198087853-e6f11eee-5b85-499e-a9ef-6207ea3e81e9.jpg)
+
+![9 площадок](https://user-images.githubusercontent.com/103886479/198088294-e231779b-c54b-4b7f-866a-d1e2e220ced9.jpg)
+
+Далее следует остановить остановить работу по достижении большого кол-ва шагов и проверить обучение
+
+![конец](https://user-images.githubusercontent.com/103886479/198088614-127ad56a-d2be-4576-a4e2-6ffc010b0bf5.jpg)
+
+Соответственно, делаем вывод, что чем больше площадок используется, тем большее количество шагов осуществляется и обучение происходит в более быстром темпе.
+
 
 ## Задание 2
-Подготовка данных для работы с линейной регрессией:
+Подробно описать каждую строку файла конфигурации нейронной сети. Самостоятельно найти информацию о компонентах Decision Requester, Behavior Parameters, добавленных сфере.
 
-![подготовка](https://user-images.githubusercontent.com/103886479/192092265-952fbf33-f5b0-417d-81b2-8eab763d0245.jpg)
-
-
-Далее смотрим на функции:
-
-![функции](https://user-images.githubusercontent.com/103886479/192092316-e3934b65-e292-4ac8-8f9f-09012910d14c.jpg)
-
-   
-   Насколько я понимаю, связанными функциями называются iterate и optimize. optimize и выполняет градиентный спуск, т.е. метод нахождения минимума функции. Это нам понадобится для построения линейной регрессии.
-   
-   
-После запуска первой итерации в GoogleColab получилось следующее:
-![код11](https://user-images.githubusercontent.com/103886479/192091115-14e1e329-bf0e-433d-b65c-701274efb3ae.jpg)
-
-Второй итерации:
-![код2](https://user-images.githubusercontent.com/103886479/192090736-f63f7562-25c2-4d48-9bc5-7f04f4ebe418.jpg)
-
-Третьей:
-![код3](https://user-images.githubusercontent.com/103886479/192090824-06a29e31-4b97-4a1c-9a39-913d54e9f7b0.jpg)
-
-Четвёртой:
-![код4](https://user-images.githubusercontent.com/103886479/192090920-8990a2dd-18aa-4615-8a3e-f6e20e9b572a.jpg)
-
-Пятой:
-![код5](https://user-images.githubusercontent.com/103886479/192090958-da529913-9295-4915-b05f-ceab3f35b4de.jpg)
-
-Тысячной:
-![код1000](https://user-images.githubusercontent.com/103886479/192091219-6a2ce8d0-6d30-4c87-8c71-52a5326128b8.jpg)
-
-Как мы видим, чем больше итераций, тем выше график.
-
-### Должна ли величина loss стремиться к нулю при изменении исходных данных? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ.
-
-Полагаю, да. loss - это величина, которая показывает количество потерь. По мере увеличения нами количества итераций мы наблюдаем уменьшение этой величины.
-
-Пример: 
-1 итерация
-![код11](https://user-images.githubusercontent.com/103886479/192091115-14e1e329-bf0e-433d-b65c-701274efb3ae.jpg)
-
-10-я итерация
-![10](https://user-images.githubusercontent.com/103886479/192091791-bb13b7d8-db2f-4fff-85c4-1a4e72deed32.jpg)
-
-100-я итерация
-![100](https://user-images.githubusercontent.com/103886479/192091680-8751f16f-1acc-40d7-a5f8-4b8dc97a727b.jpg)
-
-1000-я
-![код1000](https://user-images.githubusercontent.com/103886479/192091219-6a2ce8d0-6d30-4c87-8c71-52a5326128b8.jpg)
-
-10000-я
-![10000](https://user-images.githubusercontent.com/103886479/192091837-aa53f09d-2bcc-421b-a237-7a3cd871162a.jpg)
+trainer_type - тип обучения
+hyperparameters - параметры для управления обучением
+    batch_size - количество опыта на каждом шаге
+    buffer_size - сколько опыта нужно для обновления модели
+    learning_rate - начальная скорость обучения
+    beta - случайные действия агента
+    epsilon - ограничение на изменения в модели
+    lambd - регуляция, как сильно агент полагается на текущий value estimate
+    num_epoch - столько раз обрабатываем опыт
+    learning_rate_schedule - скорость обучения с течением времени
+network_settings - параметры нейронной сети
+    normalize - применяем ли нормализация к наблюдаемым данным да/нет
+    hidden_units - количество нейронов сети
+    num_layers - количество скрытых слоёв в нейронной сети
+reward_signals - награда за действие агента
+    extrinsic - внешние сигналы
+        gamma - получит ли агент награду сейчас
+        strength - умножает награду полученную от окружения
+max_steps - сколько должно быть шагов перед завершением обучения
+time_horizon - необходимое агенту кол-во опыта, чтобы добавить его в buffer_size
+summary_freq - количество опыта, для выведения статистики
 
 
-## Задание 3
-### Какова роль параметра Lr? Ответьте на вопрос, приведите пример выполнения кода, который подтверждает ваш ответ. В качестве эксперимента можете изменить значение параметра.
-Lr, если я правильно понимаю, - это параметр скорости обучения, необходимый для алгоритма градиентного спуска. 
+
 
 
 ## Выводы
+В данной лабораторной работе мы наглядно увидели, как работает внутриигровой баланс. Продуманность и качество разработанной игры показывает её сбалансированность. Если в игру слишком сложно играть - у пользователя опустятся руки, а если игра слишком лёгкая, заниматься ей просто неинтересно. Для соблюдения этого балланса расзработчикам приходит на помощь машинное обучение, которое позволяет продумать и скорректировать поведение игровых персонажей/объектов под конкретного ирока. 
 
-В данной лабораторной работе мы настроили всё необходимое ПО для дальнейшей работы и теперь имеем представление, как пользоваться VS Code, и Unity. Узнали что такое градиентный спуск, линейная зависимость, алгоритм градиентного спуска. Научились использовать GoogleColab и Github. 
 
 | Plugin | README |
 | ------ | ------ |
