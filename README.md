@@ -31,6 +31,7 @@
 Для начала мы в Unity добавим все нужные библиотеки:
 
 ml-agents-release_19/com.unity.ml-agents/package.json
+
 ml-agents-release_19/com.unity.ml-agents.extensions/package.json
 
 ![задание 1](https://user-images.githubusercontent.com/103886479/198079908-4f1f4bff-d173-4ea2-829f-586ed8b3892a.jpg)
