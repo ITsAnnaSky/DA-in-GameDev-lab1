@@ -250,9 +250,10 @@ OR:
 ![image](https://user-images.githubusercontent.com/103886479/204089990-f19dc345-face-452b-a645-cddfd525d327.png)
 
 AND:
-![image](https://user-images.githubusercontent.com/103886479/204090229-40ef2bfc-5785-4d75-b412-a2487854d1cf.png)
+
 
 NAND:
+![image](https://user-images.githubusercontent.com/103886479/204090993-8bae4371-0bd4-4716-b7b3-2d9aa77e9030.png)
 
 
 XOR:
