@@ -247,6 +247,13 @@ public class Perceptron : MonoBehaviour {
 Ниже вы можете видеть построенные графики с помощью программы exel.
 OR:
 
+![image](https://user-images.githubusercontent.com/103886479/204089990-f19dc345-face-452b-a645-cddfd525d327.png)
+
+AND:
+![image](https://user-images.githubusercontent.com/103886479/204090229-40ef2bfc-5785-4d75-b412-a2487854d1cf.png)
+
+NAND:
+
 
 XOR:
 ![image](https://user-images.githubusercontent.com/103886479/204086395-af57c2a8-3519-4969-8236-1c52d2e58d79.png)
