@@ -35,6 +35,8 @@
 
 1) Реализуем логическую операцию ИЛИ|OR
 
+Задаём необходимые параметры
+
 ![3](https://user-images.githubusercontent.com/103886479/204014692-a9552452-2d3f-41ce-a846-ac7b3ffdd1b0.jpg)
 
 Зададим 1 эпоху как в леции и понаблюдаем за тестами в консоли:
@@ -103,7 +105,140 @@
 ![image](https://user-images.githubusercontent.com/103886479/204079576-10d74049-92c7-4f52-adaf-dfd9c9dee429.png)
 ![image](https://user-images.githubusercontent.com/103886479/204079592-a747dab8-9a33-4522-8dac-36148b3fd407.png)
 
-2) Реализуем логическую операцию И|AND
+2) Реализуем логическую операцию Иисключающее ИЛИ|XOR
+
+Задаём необходимые параметры
+
+![image](https://user-images.githubusercontent.com/103886479/204080232-8a451d98-03ed-42cb-8616-2437c2e89759.png)
+
+Сразу зададим 4 эпохи:
+
+![image](https://user-images.githubusercontent.com/103886479/204080291-bb059192-d989-441a-82c1-16603cc392c9.png)
+
+Результат не верный, даже спустя несколько повторений эксперимента. Меняя значения эпох обучения удалось выяснить, что с третьей-четвертой эпохи значение Total Error всегда было равно 4. Значит, однослойный перцептрон не может обучиться этой операции. XOR не является линейной операцией, соответственно однослойный прецептрон для неё не предназначен. 
+
+Для решения применим следующий способ: воспользуемся формулой x XOR y = (x Or y) AND (x NAND y). Для этого я создала еще две модели modelOr и modelNAND.  Когда первые две модели закончили обучение, их значения были переданы в CalcOutput после тренировки модели умножения. Вот следующий скрипт:
+
+``` 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class TrainingSet
+{
+	public double[] input;
+	public double output;
+}
+
+public class Perceptron : MonoBehaviour {
+	public TrainingSet[] modelOR;
+	public TrainingSet[] modelNAND;
+	public TrainingSet[] ts;
+	double[] weights = {0,0};
+	double bias = 0;
+	double totalError = 0;
+
+	double DotProductBias(double[] v1, double[] v2) 
+	{
+		if (v1 == null || v2 == null)
+			return -1;
+	 
+		if (v1.Length != v2.Length)
+			return -1;
+	 
+		double d = 0;
+		for (int x = 0; x < v1.Length; x++)
+		{
+			d += v1[x] * v2[x];
+		}
+
+		d += bias;
+	 
+		return d;
+	}
+
+	double CalcOutput(int i, TrainingSet[] set)
+	{
+		double dp = DotProductBias(weights,set[i].input);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void InitialiseWeights()
+	{
+		for(int i = 0; i < weights.Length; i++)
+		{
+			weights[i] = Random.Range(-1.0f,1.0f);
+		}
+		bias = Random.Range(-1.0f,1.0f);
+	}
+
+	void UpdateWeights(int j, TrainingSet[] set)
+	{
+		double error = set[j].output - CalcOutput(j, set);
+		totalError += Mathf.Abs((float)error);
+		for(int i = 0; i < weights.Length; i++)
+		{			
+			weights[i] = weights[i] + error * set[j].input[i]; 
+		}
+		bias += error;
+	}
+
+	double CalcOutput(double i1, double i2)
+	{
+		double[] inp = new double[] {i1, i2};
+		double dp = DotProductBias(weights,inp);
+		if(dp > 0) return(1);
+		return (0);
+	}
+
+	void Train(int epochs, TrainingSet[] set)
+	{
+		InitialiseWeights();
+		
+		for(int e = 0; e < epochs; e++)
+		{
+			totalError = 0;
+			for(int t = 0; t < set.Length; t++)
+			{
+				UpdateWeights(t, set);
+				Debug.Log("W1: " + (weights[0]) + " W2: " + (weights[1]) + " B: " + bias);
+			}
+			Debug.Log("TOTAL ERROR: " + totalError);
+		}
+	}
+
+	void Start () {
+		Train(8, modelOR);
+		double modelOr0 = CalcOutput(0,0); //0
+		double modelOr1 = CalcOutput(0,1); //1
+		double modelOr2 = CalcOutput(1,0); //1
+		double modelOr3 = CalcOutput(1,1); //1
+		
+		Train(8, modelNAND);
+		double modelNAND0 = CalcOutput(0,0); //1
+		double modelNAND1 = CalcOutput(0,1); //1
+		double modelNAND2 = CalcOutput(1,0); //1
+		double modelNAND3 = CalcOutput(1,1); //0
+
+		Train(8, ts);
+		Debug.Log("Test 0 0: " + CalcOutput(modelOr0, modelNAND0));
+		Debug.Log("Test 0 1: " + CalcOutput(modelOr1, modelNAND1));
+		Debug.Log("Test 1 0: " + CalcOutput(modelOr2, modelNAND2));
+		Debug.Log("Test 1 1: " + CalcOutput(modelOr3, modelNAND3));		
+	}
+	
+	void Update () {
+		
+	}
+} 
+```
+После 8 тренировок я получила нужный результат эксперимента.
+
+![xor](https://user-images.githubusercontent.com/103886479/204081084-d4929d75-b390-4d76-8a86-6515f8021b85.jpg)
+
+
 
 
 ## Задание 2
