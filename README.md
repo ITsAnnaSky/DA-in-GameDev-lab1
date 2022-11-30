@@ -43,6 +43,7 @@
 
 Устанавливаем и запускаем TensorBoard, видим следующее:
 
+## Настройки по умолчанию
 ![graph1-1](https://user-images.githubusercontent.com/103886479/204820074-19d5518e-8fe4-452f-ac43-6bd61467adf2.jpg)
 
 
@@ -55,6 +56,15 @@
 
 
 ![self-play](https://user-images.githubusercontent.com/103886479/204821127-f335b010-ea54-4880-b130-78f87c561bca.jpg)
+
+## с buffer_size: 13000
+
+![newgraph-1](https://user-images.githubusercontent.com/103886479/204825987-4dcbaacc-e3c9-4a9b-9749-c877f106c232.jpg)
+![newgraph-2](https://user-images.githubusercontent.com/103886479/204826027-7ba4e86e-0065-47ba-bfec-f51f7cb65c00.jpg)
+![newgraph-3](https://user-images.githubusercontent.com/103886479/204826108-3c68d1e7-86ec-4493-a794-7303e1899b90.jpg)
+![newgraph-4](https://user-images.githubusercontent.com/103886479/204826134-3f26873f-7cd1-46da-9693-68189a92b435.jpg)
+![newgraph-5](https://user-images.githubusercontent.com/103886479/204826155-d3ed14e6-78cd-46c6-a29b-d6087fe4b592.jpg)
+![newrhaph-6](https://user-images.githubusercontent.com/103886479/204826190-e9b71655-c7d5-49d7-89c5-38f176737a1a.jpg)
 
 ## Задание 2
 
