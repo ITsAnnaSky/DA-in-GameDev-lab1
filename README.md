@@ -45,7 +45,16 @@
 
 ![graph1-1](https://user-images.githubusercontent.com/103886479/204820074-19d5518e-8fe4-452f-ac43-6bd61467adf2.jpg)
 
+
 ![graph1-2](https://user-images.githubusercontent.com/103886479/204820137-a390390f-e152-400c-82f4-7605e3d7b972.jpg)
+
+
+![policy-1](https://user-images.githubusercontent.com/103886479/204821032-bfc0e593-886b-4ceb-bcd4-220dae5b8fd6.jpg)
+![policy-2](https://user-images.githubusercontent.com/103886479/204821054-f52859df-f481-4227-8f88-467922049b18.jpg)
+![policy-3](https://user-images.githubusercontent.com/103886479/204821094-41458554-241f-4a19-95ec-c7d84f015f44.jpg)
+
+
+![self-play](https://user-images.githubusercontent.com/103886479/204821127-f335b010-ea54-4880-b130-78f87c561bca.jpg)
 
 ## Задание 2
 
