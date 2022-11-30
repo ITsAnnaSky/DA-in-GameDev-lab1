@@ -34,6 +34,19 @@
 Поместила файл Economic.yaml в проект
 ![yaml](https://user-images.githubusercontent.com/103886479/204790309-9b70f8ec-7fc7-44d7-bc1f-58ff0eefae9c.jpg)
 
+Качаем библиотеки, создаём виртуальное пространство
+![в отчет](https://user-images.githubusercontent.com/103886479/204814651-943bc8f5-a674-4038-944d-187d8268e2d4.jpg)
+
+Далее была запущена сцена в Unity и обучение MLAgent. Это долгий процесс, поэтому мы увеличили количество сцен и изменили такие параметры как TargetAreaEconomic (в моем случае до 13)
+
+![контрл с](https://user-images.githubusercontent.com/103886479/204819572-316c32c5-b6ba-4b9a-b1ed-ce19a0e2712f.jpg)
+
+Устанавливаем и запускаем TensorBoard, видим следующее:
+
+![graph1-1](https://user-images.githubusercontent.com/103886479/204820074-19d5518e-8fe4-452f-ac43-6bd61467adf2.jpg)
+
+![graph1-2](https://user-images.githubusercontent.com/103886479/204820137-a390390f-e152-400c-82f4-7605e3d7b972.jpg)
+
 ## Задание 2
 
 
